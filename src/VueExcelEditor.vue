@@ -2676,7 +2676,7 @@ export default defineComponent({
       // this.refresh()
       if (!noLastPage) this.lazy(() => {
         this.lastPage()
-        this.moveToSouthWest()
+        // this.moveToSouthWest()
       })
       return rec
     },
