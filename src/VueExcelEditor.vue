@@ -50,6 +50,11 @@
                   @mousedown="headerClick($event, p)"
                   @contextmenu.prevent="panelFilterClick(item)">
                 <div :class="{'filter-sign': columnFilter[p]}">
+                  <div v-if="item.customType == 'expression'" type="button" class="expression-edit-btn" @mousedown.stop="emitExpressionEditAction(item)">
+                    <svg class="text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 20 20">
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z"/>
+                    </svg>
+                  </div>
                   <span :class="{'table-col-header': !noHeaderEdit}" v-html="headerLabel(item.label, item)"></span>
                 </div>
                 <div class="col-sep"
@@ -639,6 +644,9 @@ export default defineComponent({
     }
   },
   methods: {
+    emitExpressionEditAction(field) {
+      this.$emit('set-expression', field);
+    },
     addEventListener () {
       window.addEventListener('resize', this.winResize)
       window.addEventListener('paste', this.winPaste)
@@ -3521,5 +3529,13 @@ td.hideDuplicate:not(.focus) {
   background-image: none !important;
   color: transparent;
   text-shadow: none;
+}
+.expression-edit-btn {
+  border-radius: 10px;
+  background-color: #e6b400;
+  padding: 3px;
+  margin-right: 5px;
+  cursor: pointer;
+  display: inline;
 }
 </style>
